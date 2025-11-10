@@ -85,6 +85,15 @@ services:
       - frappe_network
     depends_on:
       - backend
+    environment:
+      BACKEND: backend:8000   # au lieu de 0.0.0.0:8000
+      SOCKETIO: websocket:9000
+      FRAPPE_SITE_NAME_HEADER: frontend
+      UPSTREAM_REAL_IP_ADDRESS: 127.0.0.1
+      UPSTREAM_REAL_IP_HEADER: X-Forwarded-For
+      UPSTREAM_REAL_IP_RECURSIVE: "off"
+      PROXY_READ_TIMEOUT: 120
+      CLIENT_MAX_BODY_SIZE: 50m  
     ports:
       - "${FRONTEND_PORT_VAR}:8080"
     volumes:
