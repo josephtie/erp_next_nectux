@@ -53,6 +53,7 @@ services:
       - frappe_network
     depends_on:
       - backend
+      - db
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
@@ -65,8 +66,7 @@ services:
           --admin-password=admin \
           --db-root-username=root \
           --db-root-password=admin \
-          --install-app erpnext \
-          --install-app hrms
+          --install-app erpnext 
       else
         echo 'Site frontend already exists. Installing HRMS if missing...' &&
         bench get-app --branch version-15 hrms || true &&
